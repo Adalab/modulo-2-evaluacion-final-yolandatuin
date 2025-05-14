@@ -1,4 +1,98 @@
-.main__list {
-  padding-left: 2rem;
-  padding-bottom: 20px;
+@use '../core/variables' as var;
+
+body {
+  font-family:Arial, Helvetica, sans-serif;
+  font-size: 10pt;
+  margin: 0px;
+  padding: 0px;
+}
+
+.page {
+  padding: 0px;
+}
+
+//Header 
+
+h1 {
+  text-align: center;
+  margin-top: 1rem;
+}
+.populares {
+  width: 60%;
+}
+
+.carrito {
+  width: 30%;
+  text-align: center;
+}
+.page {
+  width: 100%;
+}
+.page__main {
+  display: flex;
+  justify-content:center;
+  gap: 2rem;
+  width: 100%;
+  margin-top: 1rem;
+  
+}
+h1, h2 {
+  font-family: 'Roboto';
+  margin-bottom: 1rem;
+}
+h2 {
+    text-align: left;
+
+}
+
+
+
+//Formulario 
+.formulario {
+  text-align: center;
+}
+
+.formulario__input, .formulario__boton {
+  border: 0;
+  padding: 0.3rem;
+  background-color: #D1FFBD;
+
+}
+
+.formulario__boton {
+  width: 10%;
+}
+
+.formulario__boton:hover {
+  background-color: #CBC3E3;
+}
+
+.formulario__input {
+  width: 60%;
+}
+
+//Productos 
+.imagen {
+  width: 100px;
+}
+.nombre-producto {
+  font-weight: bold;
+}
+.producto {
+  width: 150px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #FFB6C1;
+  padding: 0.5rem;
+}
+
+.productosUL {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
 }
