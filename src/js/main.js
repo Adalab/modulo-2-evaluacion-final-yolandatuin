@@ -2,30 +2,33 @@
 
 //CONSTANTES Y VARIABLES
 const productosCentro = document.querySelector(".js_productos-centro");
+const productosCesta = document.querySelector(".js_productos-cesta");
 
 const botonBuscar = document.querySelector(".js_boton-buscar");
 const inputBuscar = document.querySelector(".js_input-buscar");
 
 let productos = [];
+let listadoCesta = [];
 
 //FUNCIONES 
-function pintarUnProducto(productosAPintar) {
-  productosCentro.innerHTML += `
-  <li>
+function pintarUnProducto(UnProductoAPintar, lugarDondePintar ) {
+  lugarDondePintar.innerHTML += `
+  <li id="${UnProductoAPintar.id}">
         <div class="producto">
-          <img class="imagen" src="${productosAPintar.image}" alt="">
-          <p class="nombre-producto">${productosAPintar.title}</p>
-          <p class="precio-producto">${productosAPintar.price} €</p>
-          <button class="comprar">Comprar</button>
+          <img class="imagen" src="${UnProductoAPintar.image}" alt="">
+          <p class="nombre-producto">${UnProductoAPintar.title}</p>
+          <p class="precio-producto">${UnProductoAPintar.price} €</p>
+          <button class="comprar js_comprar" id="${UnProductoAPintar.id}">Comprar</button>
         </div>
   </li>`
-}
+};
 
-function renderProductosCentrales(productosAPintar) {
-productosCentro.innerHTML = '';
+function renderProductos(productosAPintar, lugarDondePintar) {
+lugarDondePintar.innerHTML = '';
 for (let producto of productosAPintar) {
-  pintarUnProducto(producto); //Se pinta un solo producto. El parámetro tiene que ser un solo item del array. 
+  pintarUnProducto(producto, lugarDondePintar); //Se pinta un solo producto. El parámetro tiene que ser un solo item del array. 
 }};
+
 
 //FUNCIONES MANEJADORAS
 function handleClickBuscar(event){
@@ -33,13 +36,26 @@ function handleClickBuscar(event){
   const valorBuscar = inputBuscar.value;
   const resultadosBusqueda = productos.filter(producto => producto.title.toLowerCase().includes(valorBuscar.toLowerCase())); //Resultado de la búsqueda 
   console.log(resultadosBusqueda);
-  renderProductosCentrales(resultadosBusqueda);
+  renderProductos(resultadosBusqueda, productosCentro);
 };
 
-function handleClickComprar(event){
+function handleClickComprar(event){  
   event.preventDefault();
-  event.target.innerText = "Eliminar";
-  event.target.classList.toggle('enCesta');
+
+  if (event.target.tagName === "BUTTON" ) {
+      event.target.innerText = "Eliminar";
+      event.target.classList.toggle('enCesta');
+
+      const clickedId = event.currentTarget.id;
+      
+      const clickedProductObjt = productos.find((producto) => producto.id === event.target.id);
+      console.log(clickedProductObjt);
+};
+
+
+
+
+
 
 };
 
@@ -57,5 +73,6 @@ fetch('https://fakestoreapi.com/products')
     productos = data;
     console.log("ya estaría");
   
-  renderProductosCentrales(productos);
+  renderProductos(productos, productosCentro);
+  renderProductos(listadoCesta, productosCesta);
 });
