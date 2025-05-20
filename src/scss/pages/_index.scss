@@ -1,33 +1,33 @@
 @use '../core/variables' as var;
-
+//GENERAL
 body {
   font-family:Arial, Helvetica, sans-serif;
   font-size: 10pt;
   margin: 0px;
   padding: 0px;
+  background-color: #fdddca;
 }
 
 .page {
   padding: 0px;
+  width: 100%;
 }
 
-//Header 
 
-h1 {
-  text-align: center;
-  margin-top: 1rem;
+//MAIN
+h2 {
+  color: #FF5733;
+  text-align: left;
 }
-.populares {
+.populars {
   width: 60%;
 }
 
-.carrito {
+.basket {
   width: 30%;
   text-align: center;
 }
-.page {
-  width: 100%;
-}
+
 .page__main {
   display: flex;
   justify-content:center;
@@ -36,64 +36,77 @@ h1 {
   margin-top: 1rem;
   
 }
-h1, h2 {
-  font-family: 'Roboto';
-  margin-bottom: 1rem;
-}
-h2 {
-    text-align: left;
 
-}
-
-
-
-//Formulario 
-.formulario {
-  text-align: center;
-}
-
-.formulario__input, .formulario__boton {
-  border: 0;
-  padding: 0.3rem;
-  background-color: #D1FFBD;
-
-}
-
-.formulario__boton {
-  width: 10%;
-}
-
-.formulario__boton:hover {
-  background-color: #CBC3E3;
-}
-
-.formulario__input {
-  width: 60%;
-}
 
 //Productos 
-.imagen {
+.image {
   width: 100px;
+  border-radius: 0.3rem;
 }
-.nombre-producto {
+.name-product {
   font-weight: bold;
+  margin-bottom: 0.2rem;
 }
-.producto {
+.product {
   width: 150px;
   margin-right: auto;
   margin-left: auto;
-  background-color: #FFB6C1;
+  background-color: white;
   padding: 0.5rem;
+  border-radius: 0.3rem;
+  
+}
+.buy {
+  background-color: orange;
+  border: 0;
+  padding: 0.5rem;
+  margin: 1rem;
+}
+
+.buy:hover {
+  background-color: var.$color-secondary;
+  cursor: pointer;
   
 }
 
-//Botón comprar
-.enCesta {
-  background-color: blue; 
-  color: white;
+.delete-from-basket {
+  text-align: center;
+  font-weight: bold;
+  background-color: #D1FFBD;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding-top: 0.2rem;
+  border-radius: 1rem;
 }
 
-.productosUL {
+.delete-from-basket:hover {
+  background-color: var.$color-secondary;
+  cursor: pointer;
+}
+
+.basket-counter {
+  display:flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.basket-counter p {
+  line-height: 2;
+}
+
+.basket-symbol {
+  background-color: orange;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.basket-symbol:hover {
+ background-color: #FF5733;
+}
+
+.productsUL {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -103,3 +116,9 @@ h2 {
 ul {
   list-style-type: none;
 }
+
+.inBasket {
+  background-color: #D1FFBD !important; 
+  color: black;
+}
+
