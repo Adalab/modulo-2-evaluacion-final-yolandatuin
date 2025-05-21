@@ -7,11 +7,12 @@ const basketProducts = document.querySelector(".js_products-basket");
 const searchButton = document.querySelector(".js_button-search");
 const inputSearch = document.querySelector(".js_input-search");
 
+
 let products = [];
 let listBasket = [];
 
 //FUNCIONES 
-function paintAProductBasket(OneProductToPAint) {
+function paintAProductBasket(OneProductToPAint) { //Pinta un solo producto en la cesta
   basketProducts.innerHTML += `
   <li id="${OneProductToPAint.id}">
         <div class="product">
@@ -19,16 +20,12 @@ function paintAProductBasket(OneProductToPAint) {
           <img class="image" src="${OneProductToPAint.image}" alt="">
           <p class="name-product">${OneProductToPAint.title}</p>
           <p class="price-product">${OneProductToPAint.price} €</p>
-          <div class="basket-counter">
-            <p class="basket-symbol js_basketProduct_more">+</p>
-            <p class="js_basketProduct_count">2</p>
-            <p class="basket-symbol js_basketProduct_more">-</p>
-          </div>
         </div>
   </li>`
+  
 };
 
-function paintAProductCenter(OneProductToPAint) {
+function paintAProductCenter(OneProductToPAint) { //Pinta un solo producto en la parte central
   centerProducts.innerHTML += `
   <li id="${OneProductToPAint.id}">
         <div class="product">
@@ -40,13 +37,13 @@ function paintAProductCenter(OneProductToPAint) {
   </li>`
 };
 
-function renderProductsCenter(productsToPaint) {
+function renderProductsCenter(productsToPaint) { //Renderiza todos los productos del centro
 centerProducts.innerHTML = '';
 for (let product of productsToPaint) {
   paintAProductCenter(product); //Se pinta un solo producto. El parámetro tiene que ser un solo item del array. 
 }};
 
-function renderProductsBasket(productsToPaint) {
+function renderProductsBasket(productsToPaint) { //Renderiza todos los productos de la cesta
 basketProducts.innerHTML = '';
 for (let product of productsToPaint) {
   paintAProductBasket(product); //Se pinta un solo producto. El parámetro tiene que ser un solo item del array. 
@@ -102,7 +99,17 @@ if (event.target.classList.contains('delete-from-basket')) {
       const basketIndex = listBasket.findIndex((product) => product.id === Number(clickedId));
       listBasket.splice(basketIndex,1);
       renderProductsBasket(listBasket);
-}}
+
+      const productsIndex = products.findIndex((product) => product.id === Number(clickedId));
+      console.log(productsIndex);
+
+      const centerButton = document.querySelector(`.js_buy[id="${clickedId}"]`);
+      if (centerButton) {
+        centerButton.classList.remove('inBasket');
+        centerButton.innerText = 'Comprar';
+      }
+}};
+
 
 //EVENTOS
 
