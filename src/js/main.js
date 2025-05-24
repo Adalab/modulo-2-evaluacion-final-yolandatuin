@@ -6,6 +6,8 @@ const basketProducts = document.querySelector(".js_products-basket");
 
 const searchButton = document.querySelector(".js_button-search");
 const inputSearch = document.querySelector(".js_input-search");
+const buttonMostrar = document.querySelector(".js_button-mostrar");
+
 
 
 let products = [];
@@ -31,6 +33,7 @@ function paintAProductCenter(OneProductToPAint) { //Pinta un solo producto en la
         <div class="product">
           <img class="image" src="${OneProductToPAint.image}" alt="">
           <p class="name-product">${OneProductToPAint.title}</p>
+          <p class="price-product">${OneProductToPAint.category}</p>
           <p class="price-product">${OneProductToPAint.price} €</p>
           <button class="buy js_buy" id="${OneProductToPAint.id}">Comprar</button>
         </div>
@@ -54,7 +57,8 @@ function handleClickSearch(event){
   event.preventDefault();
   const valueSearch = inputSearch.value;
   const searchResults = products.filter(product => product.title.toLowerCase().includes(valueSearch.toLowerCase())); //Resultado de la búsqueda 
-  console.log(searchResults);
+  
+  console.log(`el número de elementos en la búsqueda es de ${searchResults.length}`);
   renderProductsCenter(searchResults);
 };
 
@@ -110,31 +114,23 @@ if (event.target.classList.contains('delete-from-basket')) {
       }
 }};
 
-
+function handleClickMostrar(event) {
+  event.preventDefault();
+  for (let product of listBasket) {
+    console.log(product.title);
+  }
+}
 //EVENTOS
 
 
 searchButton.addEventListener("click", handleClickSearch);
 centerProducts.addEventListener("click", handleClickBuy);
 basketProducts.addEventListener("click", handleClickX);
-
+buttonMostrar.addEventListener("click", handleClickMostrar);
 
 //FETCH
 
-if (localStorage.getItem("products") === null ) {
-fetch('https://fakestoreapi.com/products')
-  .then((response) => response.json())
-  .then((data) => {
-    products = data;
-  
-  renderProductsCenter(products);
-  renderProductsBasket(listBasket);
 
-  //Almacenar en el local Storage
-  localStorage.setItem("products", JSON.stringify(products));
-/*   localStorage.setItem("listBasket", JSON.stringify(listBasket)); */
-});
-} 
 
 
 if (localStorage.getItem("products") != null){
@@ -149,4 +145,17 @@ if (localStorage.getItem("listBasket") != null){
 
 
     
-    
+    if (localStorage.getItem("products") === null ) {
+fetch('https://fakestoreapi.com/products')
+  .then((response) => response.json())
+  .then((data) => {
+    products = data;
+  
+  renderProductsCenter(products);
+  renderProductsBasket(listBasket);
+
+  //Almacenar en el local Storage
+  localStorage.setItem("products", JSON.stringify(products));
+/*   localStorage.setItem("listBasket", JSON.stringify(listBasket)); */
+});
+} 
